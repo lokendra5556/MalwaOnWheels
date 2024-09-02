@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from datetime import date, time
 
+# Driver
 
 class Driver(BaseModel):
     id: int
@@ -34,6 +35,8 @@ class DriverCreate(DriverBase):
         orm_mode = True
 
 
+#passenger
+
 class PassengerBase(BaseModel):
     name: str
     gender: str
@@ -48,6 +51,8 @@ class PassengerCreate(PassengerBase):
 
     class Config:
         orm_mode = True
+
+#Trip
 
 class TripBase(BaseModel):
     driverID: int

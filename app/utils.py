@@ -1,5 +1,7 @@
 import re
+from passlib.context import CryptContext
 
+pwd_context = CryptContext(schemes = ["bcrypt"], deprecated = "auto")
 
 def validateName(name):
     pattern = "[a-zA-Z]+"
@@ -28,3 +30,14 @@ def validateEmail(email):
         return True
     else:
         return False
+    
+def validateLicenceNum(licenceNum):
+    pattern = "^[A-Z]{2}[0-9]{13}"
+
+    if re.match(pattern ,licenceNum):
+        return True
+    else:
+        return False
+
+def hash(password):
+    return pwd_context.hash(password)

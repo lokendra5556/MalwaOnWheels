@@ -8,7 +8,7 @@ class Drivers(Base):
 
     id = Column(INT, primary_key=True, unique= True, autoincrement=True, index= True)
     name = Column(VARCHAR(30), nullable=False)
-    gender = Column(CHAR, nullable=False)
+    gender = Column(VARCHAR(6), nullable=False)
     dob = Column(DATE, nullable= False)
     address = Column(VARCHAR(100), nullable=False)
     phone = Column(VARCHAR(10), nullable= False, unique=True, index=True)
@@ -26,7 +26,7 @@ class Passengers(Base):
 
     id= Column(INT, primary_key= True, unique= True, autoincrement=True, index= True)
     name= Column(VARCHAR(30), nullable=False)
-    gender= Column(CHAR, nullable=False)
+    gender= Column(VARCHAR(6), nullable=False)
     address= Column(VARCHAR(100), nullable=False)
     dob= Column(DATE, nullable= False)
     phone= Column(VARCHAR(10), nullable= False, unique=True, index=True)

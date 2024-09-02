@@ -1,52 +1,11 @@
-from sqlalchemy.orm import Session
 
+from sqlalchemy.orm import Session
+from utils import hash
 import models, schemas
 
-
-
-#Driver
-
-#Create
-def create_driver(db: Session, driver: schemas.DriverCreate):
-    fake_hashed_password = driver.password + "notreallyhashed"
-    db_driver = models.Drivers(
-        name= driver.name,
-        gender= driver.gender,
-        address= driver.address,
-        dob= driver.dob,
-        phone= driver.phone,
-        email = driver.email,
-        licenseNum= driver.licenseNum,
-        carRegNum= driver.carRegNum,
-        hashedPassword=fake_hashed_password)
-    
-    db.add(db_driver)
-    db.commit()
-    db.refresh(db_driver)
-    return db_driver
-
-#Read
-def get_drivers(db: Session, limit : int):
-    return db.query(models.Drivers).limit(limit)
-
-def get_driver_by_id(db: Session, driver_id: int):
-    return db.query(models.Drivers).filter(models.Drivers.id == driver_id).first()
-
-
-def get_driver_by_phone(db: Session, phone: str):
-    return db.query(models.Drivers).filter(models.Drivers.phone == phone).first()
-
-def get_driver_by_licenceNum(db: Session, licenseNum: str):
-    return db.query(models.Drivers).filter(models.Drivers.licenseNum == licenseNum).first()
-
-
-
-
-
-#Passenger
+# Create
 
 def create_passenger(db: Session, passenger: schemas.PassengerCreate):
-    fake_hashed_password = passenger.password + "notreallyhashed"
     db_passenger = models.Passengers(
         name= passenger.name,
         gender= passenger.gender,
@@ -60,7 +19,7 @@ def create_passenger(db: Session, passenger: schemas.PassengerCreate):
         cpPhone1 = passenger.cpPhone1,
         cpPhone2 = passenger.cpPhone2,
         cpPhone3 = passenger.cpPhone3,
-        hashedPassword=fake_hashed_password)
+        hashedPassword= hash(passenger.password))
     
     db.add(db_passenger)
     db.commit()
